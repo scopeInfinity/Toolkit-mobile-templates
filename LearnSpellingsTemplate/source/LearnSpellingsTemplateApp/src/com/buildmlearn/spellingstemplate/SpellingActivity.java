@@ -64,6 +64,8 @@ public class SpellingActivity extends ActionBarActivity implements
 	private EditText mEt_Spelling;
 	private SeekBar mSb_SpeechRate;
 
+	private static final float MIN_SPEECH_RATE = 0.01f;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -207,8 +209,11 @@ public class SpellingActivity extends ActionBarActivity implements
 
 	private float getProgressValue(int percent) {
 		float temp = ((float) percent / 100);
-		float per = temp * 2;
-		return per;
+		float speechRate = temp * 2;
+
+		if (speechRate < MIN_SPEECH_RATE)
+			speechRate = MIN_SPEECH_RATE;
+		return speechRate;
 	}
 
 	@Override
